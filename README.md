@@ -1,103 +1,175 @@
-# DevOps Portfolio - React + TypeScript + Node.js
+# DevOps Portfolio
 
-A production-ready portfolio website built with modern tech stack, featuring a terminal-style interface with animations, a contact form backend, and Docker support.
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://hub.docker.com/u/shrinidhiupadhyaya)
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-Ready-326CE5?logo=kubernetes&logoColor=white)](./k8s)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+A production-ready DevOps portfolio website featuring a terminal-style interface with animations, contact form backend, and complete Docker + Kubernetes deployment configurations.
+
+**Live Site**: [https://shrinidhi.space](https://shrinidhi.space)
+
+---
+
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              shrinidhi.space                                 │
+└─────────────────────────────────┬───────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         Nginx Ingress Controller                             │
+│                         (TLS Termination / SSL)                              │
+└─────────────────────────────────┬───────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              Frontend                                        │
+│                    (Nginx + React Static Files)                              │
+│                                                                              │
+│   ┌─────────────┐    ┌─────────────┐    ┌─────────────┐                     │
+│   │   Pod 1     │    │   Pod 2     │    │   Pod N     │                     │
+│   │   Nginx     │    │   Nginx     │    │   Nginx     │                     │
+│   └─────────────┘    └─────────────┘    └─────────────┘                     │
+└─────────────────────────────────┬───────────────────────────────────────────┘
+                                  │ /api/*
+                                  ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              Backend                                         │
+│                    (Node.js + Express API)                                   │
+│                                                                              │
+│   ┌─────────────┐    ┌─────────────┐    ┌─────────────┐                     │
+│   │   Pod 1     │    │   Pod 2     │    │   Pod N     │   ◄── HPA (2-10)    │
+│   │   Node.js   │    │   Node.js   │    │   Node.js   │                     │
+│   └─────────────┘    └─────────────┘    └─────────────┘                     │
+└─────────────────────────────────┬───────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              MongoDB                                         │
+│                         (StatefulSet + PVC)                                  │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
 
 ## 🚀 Tech Stack
 
-### Frontend
-- **React 18** - UI library
-- **TypeScript** - Type safety
-- **Vite** - Build tool & dev server
-- **TailwindCSS** - Utility-first CSS
-- **Framer Motion** - Animations
-- **Zustand** - State management
-- **React Hook Form + Zod** - Form validation
-- **Axios** - HTTP client
+| Layer | Technology |
+|-------|------------|
+| **Frontend** | React 18, TypeScript, Vite, TailwindCSS, Framer Motion, Zustand |
+| **Backend** | Node.js, Express, TypeScript, Mongoose, Nodemailer |
+| **Database** | MongoDB 7 |
+| **Containerization** | Docker, Docker Compose |
+| **Orchestration** | Kubernetes, Kustomize |
+| **Ingress** | Nginx Ingress Controller |
+| **TLS/SSL** | Cert-Manager + Let's Encrypt |
+| **CI/CD** | GitHub Actions (optional) |
 
-### Backend
-- **Node.js** - Runtime
-- **Express** - Web framework
-- **TypeScript** - Type safety
-- **MongoDB + Mongoose** - Database
-- **Nodemailer** - Email notifications
-- **Helmet** - Security headers
-- **Rate Limiting** - API protection
-
-### DevOps
-- **Docker** - Containerization
-- **Docker Compose** - Multi-container orchestration
-- **Nginx** - Reverse proxy & static serving
-- **Health checks** - Kubernetes-ready endpoints
+---
 
 ## 📁 Project Structure
 
 ```
 portfolio-react/
-├── src/                    # Frontend source
-│   ├── components/         # React components
-│   ├── data/              # Static data
-│   ├── services/          # API services
-│   ├── store/             # Zustand stores
-│   ├── types/             # TypeScript types
-│   ├── App.tsx            # Main app component
-│   ├── main.tsx           # Entry point
-│   └── index.css          # Global styles
-├── backend/               # Backend source
+├── src/                          # Frontend React source
+│   ├── components/               # React components
+│   │   ├── About.tsx
+│   │   ├── Contact.tsx
+│   │   ├── CustomCursor.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Hero.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── Projects.tsx
+│   │   ├── Scanlines.tsx
+│   │   └── Skills.tsx
+│   ├── data/                     # Static portfolio data
+│   ├── services/                 # API client
+│   ├── store/                    # Zustand state management
+│   ├── types/                    # TypeScript types
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+├── backend/                      # Backend Node.js source
 │   ├── src/
-│   │   ├── config/        # Database config
-│   │   ├── middleware/    # Express middleware
-│   │   ├── models/        # Mongoose models
-│   │   ├── routes/        # API routes
-│   │   ├── services/      # Business logic
-│   │   └── index.ts       # Server entry
-│   ├── Dockerfile         # Production Dockerfile
-│   └── package.json
-├── docker-compose.yml     # Production compose
-├── docker-compose.dev.yml # Development compose
-├── Dockerfile             # Frontend production
-├── nginx.conf             # Nginx configuration
-└── package.json
+│   │   ├── config/               # Database configuration
+│   │   ├── middleware/           # Express middleware
+│   │   ├── models/               # Mongoose models
+│   │   ├── routes/               # API routes
+│   │   ├── services/             # Business logic
+│   │   └── index.ts
+│   ├── Dockerfile
+│   ├── package.json
+│   └── tsconfig.json
+├── k8s/                          # Kubernetes manifests
+│   ├── namespace.yaml
+│   ├── kustomization.yaml
+│   ├── network-policy.yaml
+│   ├── cert-manager/
+│   ├── configmaps/
+│   ├── secrets/
+│   ├── mongodb/
+│   ├── backend/
+│   ├── frontend/
+│   ├── ingress/
+│   └── README.md
+├── public/                       # Static assets
+├── docker-compose.yml            # Production Docker Compose
+├── Dockerfile                    # Frontend Dockerfile
+├── nginx.conf                    # Nginx reverse proxy config
+├── package.json
+├── tailwind.config.js
+├── tsconfig.json
+├── vite.config.ts
+└── README.md
 ```
+
+---
 
 ## 🛠️ Getting Started
 
 ### Prerequisites
+
 - Node.js 20+
-- MongoDB (local or Docker)
-- Docker & Docker Compose (optional)
+- Docker & Docker Compose
+- kubectl (for Kubernetes deployment)
 
-### Local Development
+### Option 1: Docker Compose (Recommended for Local)
 
-1. **Clone and install dependencies:**
 ```bash
+# Clone the repository
+git clone https://github.com/shrinidhiupadhyaya/portfolio-react.git
 cd portfolio-react
 
+# Start all services
+docker compose up --build -d
+
+# Access the application
+open http://localhost:8080
+```
+
+**Services:**
+| Service | URL |
+|---------|-----|
+| Frontend | http://localhost:8080 |
+| Backend API | http://localhost:8080/api |
+| MongoDB | localhost:27017 (internal) |
+
+### Option 2: Local Development
+
+```bash
 # Install frontend dependencies
 npm install
 
 # Install backend dependencies
 cd backend && npm install && cd ..
-```
 
-2. **Set up environment variables:**
-```bash
-# Frontend
-cp .env.example .env
-
-# Backend
-cp backend/.env.example backend/.env
-```
-
-3. **Start MongoDB** (if not using Docker):
-```bash
-# Using Docker
+# Start MongoDB
 docker run -d -p 27017:27017 --name mongodb mongo:7
 
-# Or install locally and start the service
-```
-
-4. **Start development servers:**
-```bash
 # Terminal 1 - Frontend
 npm run dev
 
@@ -105,112 +177,234 @@ npm run dev
 cd backend && npm run dev
 ```
 
-5. **Open browser:**
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:5000
+### Option 3: Kubernetes Deployment
 
-### Docker Development
+See [Kubernetes Deployment](#-kubernetes-deployment) section below.
 
-```bash
-# Start all services with hot reload
-docker-compose -f docker-compose.dev.yml up --build
-
-# Access:
-# - Frontend: http://localhost:3000
-# - Backend: http://localhost:5000
-# - MongoDB: localhost:27017
-```
-
-### Production Deployment
-
-```bash
-# Build and start production containers
-docker-compose up --build -d
-
-# Access:
-# - Application: http://localhost
-# - Backend API: http://localhost/api
-# - MongoDB Admin: http://localhost:8081
-```
+---
 
 ## 📡 API Endpoints
 
-### Health
-- `GET /api/health` - System health check
-- `GET /api/health/ready` - Kubernetes readiness probe
-- `GET /api/health/live` - Kubernetes liveness probe
+### Health Checks
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/health` | System health status |
+| `GET /api/health/ready` | Kubernetes readiness probe |
+| `GET /api/health/live` | Kubernetes liveness probe |
 
-### Contact
-- `POST /api/contact` - Submit contact form
-- `GET /api/contact` - List messages (needs auth in production)
-- `PATCH /api/contact/:id/read` - Mark as read
-- `DELETE /api/contact/:id` - Delete message
+### Contact Form
+| Endpoint | Description |
+|----------|-------------|
+| `POST /api/contact` | Submit contact form |
+| `GET /api/contact` | List messages |
+| `PATCH /api/contact/:id/read` | Mark as read |
+| `DELETE /api/contact/:id` | Delete message |
+
+---
 
 ## 🎨 Features
 
-- **Terminal Animation** - Boot sequence simulation
-- **Custom Cursor** - Crosshair cursor with hover effects
-- **Theme Toggle** - Dark/Light mode with persistence
-- **Sound Effects** - Optional UI sounds
-- **Smooth Scrolling** - Navigation with animations
-- **Intersection Observer** - Scroll-triggered animations
-- **Counter Animation** - Animated statistics
-- **Bento Grid** - Skills section layout
-- **Form Validation** - Client & server-side validation
+- **Terminal Boot Animation** - Simulated boot sequence
+- **Custom Crosshair Cursor** - Interactive cursor with hover effects
+- **Dark/Light Theme** - Toggle with localStorage persistence
+- **Sound Effects** - Optional retro UI sounds
+- **Smooth Scroll Navigation** - Animated section transitions
+- **Scroll-triggered Animations** - Intersection Observer powered
+- **Animated Statistics** - Counter animations
+- **Bento Grid Layout** - Modern skills section
+- **Form Validation** - Zod + React Hook Form
 - **Rate Limiting** - API protection
-- **Email Notifications** - Contact form alerts
+- **Email Notifications** - Contact form alerts via Nodemailer
 - **Responsive Design** - Mobile-first approach
+- **Scanlines Effect** - Retro CRT aesthetic
+
+---
+
+## 🐳 Docker
+
+### Build Images
+
+```bash
+# Build frontend
+docker build -t shrinidhiupadhyaya/portfolio-react-frontend:latest .
+
+# Build backend
+docker build -t shrinidhiupadhyaya/portfolio-react-backend:latest ./backend
+```
+
+### Push to Docker Hub
+
+```bash
+docker login
+docker push shrinidhiupadhyaya/portfolio-react-frontend:latest
+docker push shrinidhiupadhyaya/portfolio-react-backend:latest
+```
+
+### Docker Compose Commands
+
+```bash
+# Start services
+docker compose up -d
+
+# Rebuild and start
+docker compose up --build -d
+
+# View logs
+docker compose logs -f
+
+# Stop services
+docker compose down
+
+# Stop and remove volumes
+docker compose down -v
+```
+
+---
+
+## ☸️ Kubernetes Deployment
+
+### Prerequisites
+
+1. **Kubernetes cluster** (GKE, EKS, AKS, DigitalOcean, etc.)
+2. **kubectl** configured with cluster access
+3. **Nginx Ingress Controller** installed
+4. **Cert-Manager** installed (for TLS)
+5. **DNS** configured to point to Ingress IP
+
+### Quick Deploy
+
+```bash
+# Navigate to k8s directory
+cd k8s
+
+# Install Nginx Ingress Controller
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install ingress-nginx ingress-nginx/ingress-nginx \
+  --namespace ingress-nginx --create-namespace
+
+# Install Cert-Manager
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.0/cert-manager.yaml
+
+# Update email in cert-manager/cluster-issuer.yaml
+# Update MongoDB credentials in secrets/mongodb-secret.yaml
+
+# Deploy everything
+kubectl apply -f namespace.yaml
+kubectl apply -f cert-manager/
+kubectl apply -k .
+
+# Verify deployment
+kubectl get all -n portfolio
+kubectl get ingress -n portfolio
+kubectl get certificate -n portfolio
+```
+
+### Kubernetes Resources
+
+| Resource | Type | Replicas | Description |
+|----------|------|----------|-------------|
+| frontend | Deployment | 2 | Nginx + React static files |
+| backend | Deployment | 2-10 | Node.js API with HPA |
+| mongodb | StatefulSet | 1 | MongoDB with PVC |
+| frontend-service | ClusterIP | - | Internal frontend service |
+| backend-service | ClusterIP | - | Internal backend service |
+| mongodb-service | Headless | - | StatefulSet DNS |
+| portfolio-ingress | Ingress | - | TLS ingress for shrinidhi.space |
+
+### Useful Commands
+
+```bash
+# Check pod status
+kubectl get pods -n portfolio -w
+
+# View logs
+kubectl logs -f deployment/frontend -n portfolio
+kubectl logs -f deployment/backend -n portfolio
+
+# Scale deployment
+kubectl scale deployment backend --replicas=5 -n portfolio
+
+# Restart deployment
+kubectl rollout restart deployment/frontend -n portfolio
+
+# Check HPA
+kubectl get hpa -n portfolio
+
+# Port forward for local testing
+kubectl port-forward svc/frontend-service 8080:80 -n portfolio
+
+# Delete everything
+kubectl delete -k .
+```
+
+For detailed Kubernetes deployment instructions, see [k8s/README.md](./k8s/README.md).
+
+---
 
 ## 🔧 Environment Variables
 
-### Frontend (.env)
+### Frontend
+
 ```env
-VITE_API_URL=http://localhost:5000/api
-VITE_APP_NAME=DevOps Portfolio
+VITE_API_URL=/api
 ```
 
-### Backend (.env)
+### Backend
+
 ```env
 PORT=5000
-NODE_ENV=development
-MONGODB_URI=mongodb://localhost:27017/portfolio
-CORS_ORIGIN=http://localhost:3000
+NODE_ENV=production
+MONGODB_URI=mongodb://mongo:27017/portfolio
+CORS_ORIGIN=https://shrinidhi.space
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USER=your-email@gmail.com
 SMTP_PASS=your-app-password
-EMAIL_TO=hello@shrinidhi.dev
+EMAIL_TO=contact@shrinidhi.space
 ```
 
-## 🚢 Deployment Options
+---
 
-### Docker (Recommended)
-Use the provided `docker-compose.yml` for easy deployment.
+## 📊 Resource Requirements
 
-### Kubernetes
-The backend includes health check endpoints for K8s probes:
-- Readiness: `/api/health/ready`
-- Liveness: `/api/health/live`
+| Component | CPU Request | Memory Request | CPU Limit | Memory Limit |
+|-----------|-------------|----------------|-----------|--------------|
+| Frontend | 50m | 64Mi | 100m | 128Mi |
+| Backend | 100m | 128Mi | 300m | 256Mi |
+| MongoDB | 250m | 256Mi | 500m | 512Mi |
 
-### Vercel (Frontend) + Railway/Render (Backend)
-1. Deploy frontend to Vercel
-2. Deploy backend to Railway/Render
-3. Update `VITE_API_URL` to point to deployed backend
+**Minimum Total**: ~400m CPU, ~450Mi Memory
 
-### Traditional VPS
-1. Build frontend: `npm run build`
-2. Build backend: `cd backend && npm run build`
-3. Use Nginx as reverse proxy
-4. Use PM2 for process management
+---
+
+## 🔒 Security Features
+
+- **TLS/SSL** - Let's Encrypt certificates via Cert-Manager
+- **Security Headers** - X-Frame-Options, X-Content-Type-Options, CSP
+- **Rate Limiting** - API request limiting
+- **Helmet.js** - Express security middleware
+- **Network Policies** - Pod-to-pod traffic restriction (optional)
+- **Non-root Containers** - Security context in Kubernetes
+- **Secrets Management** - Kubernetes secrets for credentials
+
+---
 
 ## 📝 License
 
 MIT License - feel free to use this for your own portfolio!
 
+---
+
 ## 👨‍💻 Author
 
-**Shrinidhi** - DevOps Engineer
+**Shrinidhi Upadhyaya** - DevOps Engineer
+
+- Website: [shrinidhi.space](https://shrinidhi.space)
+- GitHub: [@shrinidhiupadhyaya](https://github.com/shrinidhiupadhyaya)
+- Docker Hub: [shrinidhiupadhyaya](https://hub.docker.com/u/shrinidhiupadhyaya)
 
 ---
 
-Built with 💚 using React, TypeScript & Node.js
+<p align="center">
+  Built with 💚 using React, TypeScript, Node.js, Docker & Kubernetes
+</p>
