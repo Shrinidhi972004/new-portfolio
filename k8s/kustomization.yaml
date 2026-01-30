@@ -1,51 +1,24 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-metadata:
-  name: portfolio-app
-
 namespace: portfolio
 
-# Common labels applied to all resources
+resources:
+  - namespace.yaml
+  - secrets.yaml
+  - configmap.yaml
+  - mongodb-pvc.yaml
+  - mongodb-deployment.yaml
+  - mongodb-service.yaml
+  - backend-deployment.yaml
+  - backend-service.yaml
+  - frontend-deployment.yaml
+  - frontend-service.yaml
+  - ingress.yaml
+  - cluster-issuer.yaml
+  - backend-hpa.yaml
+  - frontend-hpa.yaml
+
 commonLabels:
   app.kubernetes.io/part-of: portfolio
   app.kubernetes.io/managed-by: kustomize
-
-resources:
-  # Namespace
-  - namespace.yaml
-  
-  # ConfigMaps
-  - configmaps/nginx-config.yaml
-  
-  # Secrets
-  - secrets/mongodb-secret.yaml
-  
-  # MongoDB
-  - mongodb/pvc.yaml
-  - mongodb/statefulset.yaml
-  - mongodb/service.yaml
-  
-  # Backend
-  - backend/deployment.yaml
-  - backend/service.yaml
-  - backend/hpa.yaml
-  
-  # Frontend
-  - frontend/deployment.yaml
-  - frontend/service.yaml
-  
-  # Ingress
-  - ingress/ingress.yaml
-  
-  # Network Policies (optional - uncomment for production)
-  # - network-policy.yaml
-
-# Image customization
-images:
-  - name: portfolio-react-backend
-    newName: shrinidhiupadhyaya/portfolio-react-backend
-    newTag: latest
-  - name: portfolio-react-frontend
-    newName: shrinidhiupadhyaya/portfolio-react-frontend
-    newTag: latest

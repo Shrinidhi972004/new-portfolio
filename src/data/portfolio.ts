@@ -92,63 +92,108 @@ export const skills: Skill[] = [
 export const projects: Project[] = [
   {
     id: 1,
-    title: 'Cloud-Native E-Commerce Platform',
+    title: 'Legal & Cyber Education Platform',
     badges: {
-      live: '99.9% Uptime',
-      tech: 'Kubernetes',
+      live: 'AI-Powered',
+      tech: '3D Games',
     },
     architecture: {
-      nodes: ['Ingress', 'Services', 'Pods', 'DB'],
+      nodes: ['React', 'Three.js', 'Node.js', 'SQLite'],
       arrows: ['→', '→', '→'],
     },
     description:
-      'Migrated monolithic application to microservices architecture on Kubernetes, reducing deployment time by 80% and improving scalability.',
+      'An interactive, gamified learning platform teaching Digital Laws, Cyber Ethics, and Legislation through immersive 3D games with 50+ progressive levels.',
     challenges: [
-      'Zero-downtime deployments with blue-green strategy',
-      'Auto-scaling based on custom metrics',
-      'Secrets management with HashiCorp Vault',
+      'Built 4 interactive games: Phishing Detective, Cyber Judge, Legislation Architect',
+      '3D environments with React Three Fiber and Three.js',
+      'JWT authentication with XP tracking, badges, and leaderboards',
     ],
-    techStack: ['Terraform', 'EKS', 'ArgoCD', 'Prometheus'],
+    techStack: ['React', 'TypeScript', 'Three.js', 'Node.js', 'SQLite', 'Tailwind CSS'],
+    github: 'https://github.com/Shrinidhi972004/majorproject',
   },
   {
     id: 2,
-    title: 'Enterprise CI/CD Pipeline',
+    title: 'Construction Site Safety AI System',
     badges: {
-      live: '500+ Builds/Day',
-      tech: 'GitOps',
+      live: '99.9% Uptime',
+      tech: 'YOLOv8',
     },
     architecture: {
-      nodes: ['Git', 'CI', 'Registry', 'Deploy'],
+      nodes: ['Camera', 'YOLOv8', 'FastAPI', 'K8s'],
       arrows: ['→', '→', '→'],
     },
     description:
-      'Designed and implemented a GitOps-based CI/CD pipeline supporting 50+ microservices with automated testing and security scanning.',
+      'Real-time safety monitoring system using computer vision and YOLOv8 for PPE detection, zone monitoring, and emergency alerting on construction sites.',
     challenges: [
-      'Multi-environment promotion workflows',
-      'Integrated security scanning (SAST/DAST)',
-      'Automated rollback on failure detection',
+      'Real-time PPE detection with custom-trained YOLOv8 model',
+      'Kubernetes deployment with HPA, SSL, and Prometheus/Grafana monitoring',
+      'Twilio integration for automated emergency calling',
     ],
-    techStack: ['GitHub Actions', 'ArgoCD', 'Trivy', 'SonarQube'],
+    techStack: ['Python', 'FastAPI', 'YOLOv8', 'React', 'Docker', 'Kubernetes', 'Prometheus'],
+    github: 'https://github.com/Shrinidhi972004/DevHost-2025-CodeMartials',
   },
   {
     id: 3,
-    title: 'Infrastructure Cost Optimization',
+    title: 'Passwordless Authentication System',
     badges: {
-      live: '60% Cost Reduction',
-      tech: 'Multi-Cloud',
+      live: 'FIDO2/WebAuthn',
+      tech: 'Zero Password',
     },
     architecture: {
-      nodes: ['AWS', 'Terraform', 'GCP'],
-      arrows: ['↔', '↔'],
+      nodes: ['Browser', 'Express', 'MongoDB', 'FIDO2'],
+      arrows: ['→', '→', '→'],
     },
     description:
-      'Implemented multi-cloud strategy with automated resource scheduling, spot instance management, and right-sizing recommendations.',
+      'Modern diary application eliminating passwords entirely using FIDO2/WebAuthn technology with biometric authentication and hardware security keys.',
     challenges: [
-      'Automated spot instance failover',
-      'Resource tagging and cost allocation',
-      'Scheduled scaling for non-prod environments',
+      'FIDO2 compliance with biometric and hardware key support',
+      'Kubernetes deployment with automated cloud detection scripts',
+      'Multi-cloud deployment support (AWS, GCP, Azure)',
     ],
-    techStack: ['Terraform', 'AWS', 'GCP', 'Infracost'],
+    techStack: ['Node.js', 'Express', 'MongoDB', 'WebAuthn', 'Docker', 'Kubernetes'],
+    github: 'https://github.com/Shrinidhi972004/passwordless-password-authentication-system',
+  },
+  {
+    id: 4,
+    title: 'Cloud Media Gallery',
+    badges: {
+      live: 'Production Ready',
+      tech: 'AWS S3',
+    },
+    architecture: {
+      nodes: ['React', 'Express', 'MongoDB', 'S3'],
+      arrows: ['→', '→', '→'],
+    },
+    description:
+      'Cloud-based media gallery with MERN stack and AWS S3 for secure image/video upload, folder organization, and responsive media management.',
+    challenges: [
+      'AWS S3 integration with secure file uploads and management',
+      'Security hardened with Helmet, rate limiting, and input validation',
+      'Docker multi-stage builds with Nginx reverse proxy',
+    ],
+    techStack: ['React', 'Node.js', 'MongoDB', 'AWS S3', 'Docker', 'Nginx'],
+    github: 'https://github.com/Shrinidhi972004/Image-and-video-gallery-using-aws-s3-',
+  },
+  {
+    id: 5,
+    title: 'Placement Notification Bot',
+    badges: {
+      live: '<10s Latency',
+      tech: 'Real-time',
+    },
+    architecture: {
+      nodes: ['Email', 'Python', 'Docker', 'Notify'],
+      arrows: ['→', '→', '→'],
+    },
+    description:
+      'Automated notification bot that monitors placement officer emails and instantly notifies students with less than 10 seconds latency.',
+    challenges: [
+      'Real-time email monitoring with sub-10 second latency',
+      'Dockerized deployment for reliable 24/7 operation',
+      'Instant push notifications to students',
+    ],
+    techStack: ['Python', 'Docker', 'IMAP', 'Push Notifications'],
+    github: 'https://github.com/Shrinidhi972004/placements-updates-notification-bot',
   },
 ]
 
@@ -159,9 +204,9 @@ export const stats = [
 ]
 
 export const socialLinks = [
-  { name: 'GitHub', url: 'https://github.com/shrinidhi' },
+  { name: 'GitHub', url: 'https://github.com/Shrinidhi972004' },
   { name: 'LinkedIn', url: 'https://linkedin.com/in/shrinidhi' },
-  { name: 'Email', url: 'mailto:hello@shrinidhi.dev' },
+  { name: 'Email', url: 'mailto:shrinidhiupadhyaya00@gmail.com' },
 ]
 
 export const contactInfo = {
@@ -169,8 +214,8 @@ export const contactInfo = {
   location: 'Remote / Worldwide',
   responseTime: '< 24 hours',
   links: {
-    github: 'github.com/shrinidhi',
+    github: 'github.com/Shrinidhi972004',
     linkedin: 'linkedin.com/in/shrinidhi',
-    email: 'hello@shrinidhi.dev',
+    email: 'shrinidhiupadhyaya00@gmail.com',
   },
 }

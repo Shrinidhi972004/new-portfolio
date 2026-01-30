@@ -14,6 +14,7 @@ export interface Project {
   description: string
   challenges: string[]
   techStack: string[]
+  github?: string
 }
 
 export interface Skill {

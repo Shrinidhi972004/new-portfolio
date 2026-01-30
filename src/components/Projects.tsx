@@ -104,17 +104,18 @@ function ProjectCard({ project, index, inView }: ProjectCardProps) {
       </div>
 
       {/* Link */}
-      <div className="px-6 pb-6">
-        <a
-          href="#"
-          className="text-accent text-sm hover:underline transition-all inline-flex items-center gap-2"
-          onClick={(e) => {
-            e.preventDefault()
-            playClickSound()
-          }}
-        >
-          <span>View Case Study →</span>
-        </a>
+      <div className="px-6 pb-6 flex gap-4">
+        {project.github && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent text-sm hover:underline transition-all inline-flex items-center gap-2"
+            onClick={() => playClickSound()}
+          >
+            <span>View on GitHub →</span>
+          </a>
+        )}
       </div>
     </motion.article>
   )

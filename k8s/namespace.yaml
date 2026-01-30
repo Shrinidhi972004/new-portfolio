@@ -4,4 +4,4 @@ metadata:
   name: portfolio
   labels:
     app.kubernetes.io/name: portfolio
-    app.kubernetes.io/managed-by: kubectl
+    app.kubernetes.io/part-of: portfolio

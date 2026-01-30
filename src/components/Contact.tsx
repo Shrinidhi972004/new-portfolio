@@ -73,17 +73,17 @@ export function Contact() {
               <span className="text-xs text-gray-500">contact_info.json</span>
             </div>
             <div className="p-6">
-              <pre className="text-sm leading-[1.8] mb-8 overflow-x-auto">
-{`{
-  `}<span className="json-key">"status"</span>: <span className="json-string">"{contactInfo.status}"</span>,
-{`  `}<span className="json-key">"location"</span>: <span className="json-string">"{contactInfo.location}"</span>,
-{`  `}<span className="json-key">"response_time"</span>: <span className="json-string">"{contactInfo.responseTime}"</span>,
-{`  `}<span className="json-key">"links"</span>: {`{
-    `}<span className="json-key">"github"</span>: <span className="json-string">"{contactInfo.links.github}"</span>,
-{`    `}<span className="json-key">"linkedin"</span>: <span className="json-string">"{contactInfo.links.linkedin}"</span>,
-{`    `}<span className="json-key">"email"</span>: <span className="json-string">"{contactInfo.links.email}"</span>
-{`  }`}
-{`}`}
+              <pre className="text-sm leading-[1.8] mb-8 overflow-x-auto whitespace-pre-wrap">
+                <span>{'{'}</span>{'\n'}
+                <span>{'  '}<span className="json-key">"status"</span>: <span className="json-string">"{contactInfo.status}"</span>,</span>{'\n'}
+                <span>{'  '}<span className="json-key">"location"</span>: <span className="json-string">"{contactInfo.location}"</span>,</span>{'\n'}
+                <span>{'  '}<span className="json-key">"response_time"</span>: <span className="json-string">"{contactInfo.responseTime}"</span>,</span>{'\n'}
+                <span>{'  '}<span className="json-key">"links"</span>: {'{'}</span>{'\n'}
+                <span>{'    '}<span className="json-key">"github"</span>: <span className="json-string">"{contactInfo.links.github}"</span>,</span>{'\n'}
+                <span>{'    '}<span className="json-key">"linkedin"</span>: <span className="json-string">"{contactInfo.links.linkedin}"</span>,</span>{'\n'}
+                <span>{'    '}<span className="json-key">"email"</span>: <span className="json-string">"{contactInfo.links.email}"</span></span>{'\n'}
+                <span>{'  }'}</span>{'\n'}
+                <span>{'}'}</span>
               </pre>
 
               <div className="flex gap-4 flex-wrap">
